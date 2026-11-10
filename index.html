@@ -111,7 +111,7 @@
       text-align: center;
       border: 1px solid #ffffff20;
       border-radius: 24px;
-      background: #0b1025c9;
+      background: #0b1025;
       box-shadow: 0 24px 80px #0007;
       backdrop-filter: blur(8px);
     }
@@ -152,8 +152,8 @@
         #101a26;
     }
 
-    body.scene-ocean main { background: #0c2032c9; }
-    body.scene-garden main { background: #14251dc9; }
+    body.scene-ocean main { background: #0c2032; }
+    body.scene-garden main { background: #14251d; }
 
     .eyebrow {
       margin: 0 0 .8rem;
@@ -202,21 +202,46 @@
       gap: .65rem;
     }
 
+    .motion-toggle {
+      display: block;
+      margin: 0 0 1.5rem auto;
+      border-radius: .5rem;
+      background: #17213a;
+    }
+
     button {
       margin-top: 1.5rem;
       padding: .8rem 1.25rem;
       min-height: 44px;
-      border: 1px solid #e7c98e99;
+      border: 2px solid #f8e9c6;
       border-radius: 999px;
-      background: #e7c98e18;
-      color: #f8e9c6;
+      background: #24314a;
+      color: #ffffff;
       font: 600 .9rem system-ui, sans-serif;
       cursor: pointer;
       transition: background .2s ease, transform .2s ease;
     }
 
-    button:hover { background: #e7c98e30; transform: translateY(-2px); }
-    button:focus-visible { outline: 2px solid #f8e9c6; outline-offset: 4px; }
+    button:hover {
+      background: #344866;
+      text-decoration: underline;
+      transform: translateY(-2px);
+    }
+
+    button:focus-visible {
+      outline: 3px solid #ffffff;
+      outline-offset: 4px;
+    }
+
+    body.motion-paused *,
+    body.motion-paused *::before,
+    body.motion-paused *::after {
+      animation-play-state: paused !important;
+    }
+
+    body.motion-paused .scene.active {
+      animation: none;
+    }
 
     @keyframes twinkle {
       from { opacity: .35; transform: scale(.8); }
@@ -254,6 +279,7 @@
       .controls { flex-direction: column; align-items: stretch; }
       .controls button { margin-top: .75rem; }
       .flower { width: 90px; }
+      .motion-toggle { margin-bottom: 1rem; }
     }
   </style>
 </head>
@@ -290,6 +316,10 @@
   </svg>
 
   <main>
+    <button id="motionToggle" class="motion-toggle" type="button" aria-pressed="false">
+      Pause animations
+    </button>
+
     <section id="homeScene" class="scene active">
       <p class="eyebrow">An interactive poem</p>
       <h1 tabindex="-1">Under the Stars</h1>
@@ -304,7 +334,7 @@
     <section id="oceanScene" class="scene" aria-labelledby="oceanTitle">
       <p class="eyebrow">A place in the poem</p>
       <h1 id="oceanTitle" tabindex="-1">The Ocean</h1>
-      <div class="scene-poem" aria-live="polite">
+      <div class="scene-poem">
         <p>and nostagic wonder of the past with the oceans</p>
       </div>
       <button type="button" data-scene="home">Back to the poem</button>
@@ -313,7 +343,7 @@
     <section id="gardenScene" class="scene" aria-labelledby="gardenTitle">
       <p class="eyebrow">A place in the poem</p>
       <h1 id="gardenTitle" tabindex="-1">Flowers &amp; Garden</h1>
-      <div class="scene-poem" aria-live="polite">
+      <div class="scene-poem">
         <p>of my youth and the stories of flowers within the</p>
         <p>garden, showing all is washed away with peace and</p>
         <p>prosperity</p>
@@ -324,7 +354,7 @@
     <section id="poemScene" class="scene" aria-labelledby="poemTitle">
       <p class="eyebrow">The whole poem</p>
       <h1 id="poemTitle" tabindex="-1">Under the Stars</h1>
-      <div class="scene-poem" aria-live="polite">
+      <div class="scene-poem">
         <p>As I wonder through looking at the sky along with the stars</p>
         <p>and nostagic wonder of the past with the oceans</p>
         <p>with me and seeing hope, while feeling the nerves</p>
@@ -344,6 +374,30 @@
       garden: document.getElementById("gardenScene"),
       poem: document.getElementById("poemScene")
     };
+
+    const motionToggle = document.getElementById("motionToggle");
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function setMotionPaused(paused) {
+      document.body.classList.toggle("motion-paused", paused);
+      motionToggle.setAttribute("aria-pressed", String(paused));
+      motionToggle.textContent = motionPreference.matches
+        ? "Animations off (reduced motion)"
+        : paused ? "Play animations" : "Pause animations";
+      motionToggle.disabled = motionPreference.matches;
+    }
+
+    setMotionPaused(motionPreference.matches);
+
+    motionPreference.addEventListener("change", (event) => {
+      setMotionPaused(event.matches || document.body.classList.contains("motion-paused"));
+    });
+
+    motionToggle.addEventListener("click", () => {
+      if (!motionPreference.matches) {
+        setMotionPaused(!document.body.classList.contains("motion-paused"));
+      }
+    });
 
     for (let i = 0; i < 50; i++) {
       const star = document.createElement("span");
@@ -372,3 +426,5 @@
   </script>
 </body>
 </html>
+
+   
