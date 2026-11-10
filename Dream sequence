@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#061522">
+  <title>The Deep Ocean | Dream Sequence</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Georgia, "Times New Roman", serif;
+      color: #fff;
+      background: #061522;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      overflow-x: hidden;
+      padding: 2rem 1rem 8rem;
+      background:
+        linear-gradient(180deg, #07111d99 0%, #091b2c8c 38%, #061522cf 100%),
+        url("ocean-bg.jpe") center 48% / cover fixed no-repeat,
+        #061522;
+    }
+
+    .ocean {
+      position: fixed;
+      z-index: 0;
+      inset: auto 0 0;
+      height: 28vh;
+      min-height: 150px;
+      overflow: hidden;
+      pointer-events: none;
+      background: linear-gradient(180deg, transparent, #092a3bd9 65%, #04131f);
+    }
+
+    .wave {
+      position: absolute;
+      top: -24px;
+      left: -50%;
+      width: 200%;
+      height: 90px;
+      background: #70b9c84a;
+      clip-path: polygon(0 38%, 8% 34%, 16% 39%, 24% 51%, 32% 61%, 40% 62%, 48% 53%, 56% 41%, 64% 34%, 72% 38%, 80% 49%, 88% 60%, 96% 61%, 100% 55%, 100% 100%, 0 100%);
+      animation: wave 14s ease-in-out infinite alternate;
+    }
+
+    .wave::after {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 0;
+      width: 100%;
+      height: 90px;
+      background: #b6dce51c;
+      clip-path: polygon(0 46%, 10% 50%, 20% 60%, 30% 62%, 40% 52%, 50% 41%, 60% 38%, 70% 46%, 80% 59%, 90% 62%, 100% 52%, 100% 100%, 0 100%);
+      transform: translateX(12%);
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(760px, 100%);
+      padding: clamp(2rem, 7vw, 5rem) clamp(1.25rem, 6vw, 4rem);
+      text-align: center;
+      border: 1px solid #d6eaf044;
+      border-radius: 28px;
+      background: #061522d9;
+      box-shadow: 0 24px 80px #0008;
+      backdrop-filter: blur(7px);
+    }
+
+    .eyebrow {
+      margin: 0 0 1rem;
+      color: #d3e6ee;
+      font: 700 .75rem/1.5 system-ui, sans-serif;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 9vw, 6rem);
+      font-weight: 400;
+      line-height: .98;
+      text-wrap: balance;
+      text-shadow: 0 4px 24px #0009;
+    }
+
+    .description {
+      max-width: 560px;
+      margin: 1.5rem auto 0;
+      color: #f0f5f7;
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      line-height: 1.7;
+    }
+
+    .dive-button,
+    .destination {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: .85rem 1.4rem;
+      border: 2px solid #e5f4f8;
+      border-radius: 999px;
+      background: #e5f4f8;
+      color: #071724;
+      font: 700 .9rem/1.3 system-ui, sans-serif;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color .2s ease, color .2s ease, transform .2s ease;
+    }
+
+    .dive-button { margin-top: 2rem; }
+
+    .dive-button:hover,
+    .destination:hover {
+      background: #b9dbe5;
+      transform: translateY(-2px);
+      text-decoration: underline;
+    }
+
+    :focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 5px;
+    }
+
+    .destinations {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .75rem;
+      margin-top: 1.5rem;
+      animation: appear .35s ease both;
+    }
+
+    .destinations[hidden] { display: none; }
+
+    .destination {
+      border-color: #d7eaf0;
+      background: #0c2638;
+      color: #fff;
+    }
+
+    .destination:hover {
+      background: #174259;
+      color: #fff;
+    }
+
+    @keyframes wave {
+      from { transform: translateX(-3%) rotate(-1deg); }
+      to { transform: translateX(3%) rotate(1deg); }
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main { padding: 2rem 1.25rem; }
+      .destinations { flex-direction: column; }
+      .destination { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ocean" aria-hidden="true"><div class="wave"></div></div>
+  <main>
+    <p class="eyebrow">Dream Sequence · Ocean</p>
+    <h1>The Deep Ocean</h1>
+    <p class="description">
+      Beneath the moonlit waves, the world grows quiet.
+      Follow the silver tide into a sea of wonder.
+    </p>
+    <button
+      class="dive-button"
+      id="diveButton"
+      type="button"
+      aria-expanded="false"
+      aria-controls="destinations">
+      Dive into the Ocean
+    </button>
+    <nav class="destinations" id="destinations" aria-label="Ocean journey" hidden>
+      <a class="destination" href="forest.html">Follow the Light to the Forest</a>
+      <a class="destination" href="index.html">Return to the Dream</a>
+    </nav>
+  </main>
+  <script>
+    const diveButton = document.getElementById("diveButton");
+    const destinations = document.getElementById("destinations");
+
+    diveButton.addEventListener("click", () => {
+      const expanded = diveButton.getAttribute("aria-expanded") === "true";
+      diveButton.setAttribute("aria-expanded", String(!expanded));
+      destinations.hidden = expanded;
+
+      if (!expanded) {
+        destinations.querySelector("a").focus();
+      }
+    });
+  </script>
+</body>
+</html>
