@@ -1,430 +1,124 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Under the Stars</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      font-family: Georgia, "Times New Roman", serif;
-      background: #070b1c;
-      color: #f5f0e7;
-    }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Poem</title>
+        <link rel="stylesheet" href="poem.styles.css">
+    </head>
+    <body class="sky-background">
+        <div class="grid container">
+            <div>As</div>
+            <div>I</div> 
+            <div>wonder</div>
+            <div>through</div>
+            <div>looking</div>
+        </div>
+        <div class="grid container">
+            <div>at</div>
+            <div>the</div>
+            <div>sky</div>
+            <div>with</div>
+            <div>stars</div>
+            <div>and</div>
+            <div>nostalgic</div>
+            <div class="underlined">wonder</div>
+            <div>of</div>
+            <div>the</div>
+            <div>past</div>
+            <div>with</div>
+            <div>oceans</div>
+        </div>
+            <div>with</div>
+        <div class="grid container">
+            <div>me</div>
+            <div>and</div>
+            <div>seeing</div>
+            <div class="underlined">hope</div>
+            <div>while</div>
+        <div class="grid container">
+            <div>feeling</div>
+            <div>the</div>
+            <div>nerves</div>
+            <div>of</div>
+            <div>my</div>
+        <div class="grid container">
+            <div>youth</div>
+            <div>and</div>
+            <div>the</div>
+            <div>stories</div>
+            <div>of</div>
+        <div class="grid container">
+            <div>flowers</div>
+            <div>within</div>
+            <div>the</div>
+            <div>garden</div>
+        <div class="grid container">
+            <div>showing</div>
+            <div>all</div>
+            <div>is</div>
+            <div>washed</div>
+            <div>away</div>
+         <div class="grid container">
+            <div>with</div>
+            <div>peace</div>
+            <div>and</div>
+            <div class="last">prosperity</div>
+        </div>
+        <script src="poem%20script.js"></script>
 
-    * { box-sizing: border-box; }
 
-    body {
-      min-height: 100vh;
-      min-height: 100svh;
-      margin: 0;
-      display: grid;
-      place-items: center;
-      padding: 1rem;
-      background:
-        radial-gradient(ellipse at 50% 110%, #24345a 0, transparent 53%),
-        radial-gradient(ellipse at 15% 15%, #151d3c 0, transparent 45%),
-        #070b1c;
-    }
+        
 
-    #sky {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
 
-    .star {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: #fff3cc;
-      box-shadow: 0 0 9px 2px #f7dfaa88;
-      animation: twinkle 3s ease-in-out infinite alternate;
-    }
+        </div>
+    </body>
 
-    .star:nth-child(3n) { animation-delay: -1.4s; }
-    .star:nth-child(4n) { width: 2px; height: 2px; animation-delay: -.8s; }
+  .last {
+    padding-bottom: 2rem;
+    border-bottom: 2px solid transparent;
+    border-image:   linear-gradient(to right,rgb(205, 133, 63, 0.5), rgba(138,90,54,0.2) 30%, transparent 65%) 1;
+}
+.grid.container {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: 2rem 4rem 0;
 
-    .ocean {
-      position: fixed;
-      z-index: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      height: 0;
-      opacity: 0;
-      pointer-events: none;
-      background: linear-gradient(180deg, #173b5b00, #123654bb 45%, #0a2038);
-      transition: opacity 1s ease, height 1s ease;
-    }
+}
+.sky-background {
+    background-image: url('milky-way.jpg');
+    background-color: #0b191e;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:cover;
+    transition-property: transform;
+    min-height: 100vh;
+    transition-duration: 3s;
+    color:#ffffff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+.underlined {
+    text-decoration:underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.15rem;
 
-    body.scene-ocean .ocean { height: min(58vh, 560px); opacity: 1; }
+} 
+const words = document.querySelectorAll(".grid.container > div");
 
-    .ocean::before, .ocean::after {
-      content: "";
-      position: absolute;
-      left: -50%;
-      width: 200%;
-      height: 100%;
-      border-radius: 48% 52% 0 0 / 18% 22% 0 0;
-      background: #4a93a866;
-      animation: wave-drift 16s linear infinite;
-    }
+function  randomize () {
+    words.forEach((word) => {
+         const rotation = Math.floor(Math.random() * 61) - 30;
+         const x = Math.floor(Math.random() * 41) - 20;
+         const y = Math.floor(Math.random() * 21) - 10;
+       
+         word.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
 
-    .ocean::before { top: 10%; }
-    .ocean::after {
-      top: 24%;
-      background: #79b9bd33;
-      animation-duration: 25s;
-      animation-direction: reverse;
-    }
-
-    .flower {
-      position: fixed;
-      z-index: 1;
-      bottom: 4vh;
-      width: clamp(95px, 15vw, 170px);
-      opacity: 0;
-      transform: translateY(30px) scale(.8);
-      pointer-events: none;
-      filter: drop-shadow(0 5px 12px #0005);
-      transition: opacity .8s ease, transform .8s ease;
-    }
-
-    body.scene-garden .flower {
-      opacity: .9;
-      transform: translateY(0) scale(1);
-      transform-origin: 50% 100%;
-      animation: flower-sway 3.2s ease-in-out infinite alternate;
-    }
-
-    .flower-left { left: 2vw; }
-    .flower-right { right: 2vw; transition-delay: .18s; }
-
-    main {
-      position: relative;
-      z-index: 2;
-      width: min(90vw, 620px);
-      padding: clamp(1.5rem, 6vw, 3rem) clamp(1.25rem, 5vw, 2rem);
-      text-align: center;
-      border: 1px solid #ffffff20;
-      border-radius: 24px;
-      background: #0b1025;
-      box-shadow: 0 24px 80px #0007;
-      backdrop-filter: blur(8px);
-    }
-
-    .scene { display: none; }
-    .scene.active { display: block; animation: arrive .65s ease both; }
-
-    .scene h1:focus {
-      outline: 2px solid #f8e9c6;
-      outline-offset: 6px;
-      border-radius: 2px;
-    }
-
-    .scene-poem {
-      display: grid;
-      gap: .55rem;
-      align-content: center;
-      min-height: 12rem;
-    }
-
-    .scene-poem p {
-      margin: 0;
-      color: #f5f0e7;
-      font-size: clamp(1.05rem, 3.2vw, 1.3rem);
-      line-height: 1.6;
-    }
-
-    body.scene-ocean {
-      background:
-        radial-gradient(ellipse at 50% 70%, #276383 0, transparent 57%),
-        linear-gradient(#10172b 0%, #162a46 45%, #0d3550 100%);
-    }
-
-    body.scene-garden {
-      background:
-        radial-gradient(ellipse at 50% 100%, #365d43 0, transparent 58%),
-        radial-gradient(ellipse at 50% 12%, #26314a 0, transparent 60%),
-        #101a26;
-    }
-
-    body.scene-ocean main { background: #0c2032; }
-    body.scene-garden main { background: #14251d; }
-
-    .eyebrow {
-      margin: 0 0 .8rem;
-      color: #e7c98e;
-      font: 600 .75rem/1.4 system-ui, sans-serif;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2.2rem, 8vw, 4rem);
-      font-weight: 400;
-      letter-spacing: .02em;
-    }
-
-    .instruction {
-      margin: .9rem 0 2rem;
-      color: #c4c8d8;
-      font: .95rem/1.6 system-ui, sans-serif;
-    }
-
-    #poem {
-      display: grid;
-      gap: .45rem;
-      min-height: 12rem;
-      align-content: center;
-    }
-
-    .line {
-      margin: 0;
-      color: #f5f0e7;
-      font-size: clamp(1rem, 3.2vw, 1.25rem);
-      line-height: 1.55;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-
-    .line.show { opacity: 1; transform: translateY(0); }
-
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: .65rem;
-    }
-
-    .motion-toggle {
-      display: block;
-      margin: 0 0 1.5rem auto;
-      border-radius: .5rem;
-      background: #17213a;
-    }
-
-    button {
-      margin-top: 1.5rem;
-      padding: .8rem 1.25rem;
-      min-height: 44px;
-      border: 2px solid #f8e9c6;
-      border-radius: 999px;
-      background: #24314a;
-      color: #ffffff;
-      font: 600 .9rem system-ui, sans-serif;
-      cursor: pointer;
-      transition: background .2s ease, transform .2s ease;
-    }
-
-    button:hover {
-      background: #344866;
-      text-decoration: underline;
-      transform: translateY(-2px);
-    }
-
-    button:focus-visible {
-      outline: 3px solid #ffffff;
-      outline-offset: 4px;
-    }
-
-    body.motion-paused *,
-    body.motion-paused *::before,
-    body.motion-paused *::after {
-      animation-play-state: paused !important;
-    }
-
-    body.motion-paused .scene.active {
-      animation: none;
-    }
-
-    @keyframes twinkle {
-      from { opacity: .35; transform: scale(.8); }
-      to { opacity: 1; transform: scale(1.2); }
-    }
-
-    @keyframes wave-drift {
-      from { transform: translateX(0); }
-      to { transform: translateX(25%); }
-    }
-
-    @keyframes flower-sway {
-      from { rotate: -4deg; }
-      to { rotate: 4deg; }
-    }
-
-    @keyframes arrive {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        animation: none !important;
-        transition: none !important;
-      }
-
-      .star { opacity: .7; }
-    }
-
-    @media (max-width: 480px) {
-      body { padding: .75rem; }
-      main { width: 100%; }
-      .controls { flex-direction: column; align-items: stretch; }
-      .controls button { margin-top: .75rem; }
-      .flower { width: 90px; }
-      .motion-toggle { margin-bottom: 1rem; }
-    }
-  </style>
-</head>
-<body>
-  <div id="sky" aria-hidden="true"></div>
-  <div id="ocean" class="ocean" aria-hidden="true"></div>
-
-  <svg class="flower flower-left" viewBox="0 0 100 150" aria-hidden="true">
-    <path d="M50 150 Q45 95 52 54" fill="none" stroke="#719779" stroke-width="5"/>
-    <path d="M49 105 Q15 78 19 101 Q37 117 49 105 M50 120 Q79 91 81 112 Q67 128 50 120" fill="#87a982"/>
-    <g transform="translate(52 43)" fill="#eaaeb9">
-      <ellipse cy="-15" rx="8" ry="15"/>
-      <ellipse cy="-15" rx="8" ry="15" transform="rotate(60)"/>
-      <ellipse cy="-15" rx="8" ry="15" transform="rotate(120)"/>
-      <ellipse cy="-15" rx="8" ry="15" transform="rotate(180)"/>
-      <ellipse cy="-15" rx="8" ry="15" transform="rotate(240)"/>
-      <ellipse cy="-15" rx="8" ry="15" transform="rotate(300)"/>
-      <circle r="7" fill="#e8c879"/>
-    </g>
-  </svg>
-
-  <svg class="flower flower-right" viewBox="0 0 100 150" aria-hidden="true">
-    <path d="M50 150 Q45 95 52 54" fill="none" stroke="#719779" stroke-width="5"/>
-    <path d="M49 105 Q15 78 19 101 Q37 117 49 105 M50 120 Q79 91 81 112 Q67 128 50 120" fill="#87a982"/>
-    <g transform="translate(52 43)" fill="#eaaeb9">
-      <ellipse cy="-15" rx="8" ry="15"/>
-      <ellipse cy="-15" rx="8" ry="15" transform="rotate(60)"/>
-      <ellipse cy="-15" rx="8" ry="15" transform="rotate(120)"/>
-      <ellipse cy="-15" rx="8" ry="15" transform="rotate(180)"/>
-      <ellipse cy="-15" rx="8" ry="15" transform="rotate(240)"/>
-      <ellipse cy="-15" rx="8" ry="15" transform="rotate(300)"/>
-      <circle r="7" fill="#e8c879"/>
-    </g>
-  </svg>
-
-  <main>
-    <button id="motionToggle" class="motion-toggle" type="button" aria-pressed="false">
-      Pause animations
-    </button>
-
-    <section id="homeScene" class="scene active">
-      <p class="eyebrow">An interactive poem</p>
-      <h1 tabindex="-1">Under the Stars</h1>
-      <p class="instruction">Choose a place from the poem to visit.</p>
-      <nav class="controls" aria-label="Choose a poem scene">
-        <button type="button" data-scene="ocean">Visit the ocean</button>
-        <button type="button" data-scene="garden">Visit flowers &amp; garden</button>
-        <button type="button" data-scene="poem">Read the whole poem</button>
-      </nav>
-    </section>
-
-    <section id="oceanScene" class="scene" aria-labelledby="oceanTitle">
-      <p class="eyebrow">A place in the poem</p>
-      <h1 id="oceanTitle" tabindex="-1">The Ocean</h1>
-      <div class="scene-poem">
-        <p>and nostagic wonder of the past with the oceans</p>
-      </div>
-      <button type="button" data-scene="home">Back to the poem</button>
-    </section>
-
-    <section id="gardenScene" class="scene" aria-labelledby="gardenTitle">
-      <p class="eyebrow">A place in the poem</p>
-      <h1 id="gardenTitle" tabindex="-1">Flowers &amp; Garden</h1>
-      <div class="scene-poem">
-        <p>of my youth and the stories of flowers within the</p>
-        <p>garden, showing all is washed away with peace and</p>
-        <p>prosperity</p>
-      </div>
-      <button type="button" data-scene="home">Back to the poem</button>
-    </section>
-
-    <section id="poemScene" class="scene" aria-labelledby="poemTitle">
-      <p class="eyebrow">The whole poem</p>
-      <h1 id="poemTitle" tabindex="-1">Under the Stars</h1>
-      <div class="scene-poem">
-        <p>As I wonder through looking at the sky along with the stars</p>
-        <p>and nostagic wonder of the past with the oceans</p>
-        <p>with me and seeing hope, while feeling the nerves</p>
-        <p>of my youth and the stories of flowers within the</p>
-        <p>garden, showing all is washed away with peace and</p>
-        <p>prosperity</p>
-      </div>
-      <button type="button" data-scene="home">Back to places</button>
-    </section>
-  </main>
-
-  <script>
-    const sky = document.getElementById("sky");
-    const scenes = {
-      home: document.getElementById("homeScene"),
-      ocean: document.getElementById("oceanScene"),
-      garden: document.getElementById("gardenScene"),
-      poem: document.getElementById("poemScene")
-    };
-
-    const motionToggle = document.getElementById("motionToggle");
-    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    function setMotionPaused(paused) {
-      document.body.classList.toggle("motion-paused", paused);
-      motionToggle.setAttribute("aria-pressed", String(paused));
-      motionToggle.textContent = motionPreference.matches
-        ? "Animations off (reduced motion)"
-        : paused ? "Play animations" : "Pause animations";
-      motionToggle.disabled = motionPreference.matches;
-    }
-
-    setMotionPaused(motionPreference.matches);
-
-    motionPreference.addEventListener("change", (event) => {
-      setMotionPaused(event.matches || document.body.classList.contains("motion-paused"));
     });
+}   
 
-    motionToggle.addEventListener("click", () => {
-      if (!motionPreference.matches) {
-        setMotionPaused(!document.body.classList.contains("motion-paused"));
-      }
-    });
-
-    for (let i = 0; i < 50; i++) {
-      const star = document.createElement("span");
-      star.className = "star";
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.top = `${Math.random() * 100}%`;
-      sky.appendChild(star);
-    }
-
-    document.querySelectorAll("[data-scene]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const destination = button.dataset.scene;
-        if (!Object.hasOwn(scenes, destination)) {
-          throw new Error(`Unknown poem scene: ${destination}`);
-        }
-
-        Object.entries(scenes).forEach(([name, scene]) => {
-          scene.classList.toggle("active", name === destination);
-        });
-
-        document.body.classList.toggle("scene-ocean", destination === "ocean");
-        document.body.classList.toggle("scene-garden", destination === "garden");
-        scenes[destination].querySelector("h1").focus();
-      });
-    });
-  </script>
-</body>
+randomize();
+document.addEventListener("click",randomize);          
 </html>
-
-   
