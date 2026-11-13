@@ -1,0 +1,32 @@
+.last {
+    padding-bottom: 2rem;
+    border-bottom: 2px solid transparent;
+    border-image:   linear-gradient(to right,rgb(205, 133, 63, 0.5), rgba(138,90,54,0.2) 30%, transparent 65%) 1;
+}
+.grid.container {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: 2rem 4rem 0;
+
+}
+.sky-background {
+    background-image: url('milky-way.jpg');
+    background-color: #0b191e;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:cover;
+    transition-property: transform;
+    min-height: 100vh;
+    transition-duration: 3s;
+    color:#ffffff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+.underlined {
+    text-decoration:underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.15rem;
+
+}
